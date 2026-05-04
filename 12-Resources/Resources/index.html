@@ -87,6 +87,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#resources" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -715,6 +720,17 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Resources
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -724,6 +740,56 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resources
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Resources">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#final-project-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Final Project Files
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -746,6 +812,47 @@
   
   
   
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      Resources
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Resources">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#final-project-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Final Project Files
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -770,6 +877,12 @@
 
   <h1>Resources</h1>
 
+<h2 id="resources">Resources</h2>
+<h3 id="overview">Overview</h3>
+<p>This page collects the supporting files for the Audio Subsystem in one place. The main item is a packaged copy of the final MPLAB X project, which contains all of the source code, MCC generated drivers, configuration bits, and project settings used to build and program the firmware on the PIC18F27Q43. Anyone who wants to rebuild the firmware, inspect the peripheral configuration, or use this subsystem as a starting point for a similar design can download the zip file below and open it directly in MPLAB X. Additional supporting documents from earlier phases of the project, such as the power budget and the API specification, are linked from their own pages on this site and are not duplicated here.</p>
+<h3 id="final-project-files">Final Project Files</h3>
+<p><a href="AUDIOSUB.zip">Download the final MPLAB X project (AUDIOSUB.zip)</a></p>
+<p>The zip file contains the complete MPLAB X project for the Audio Subsystem, including the main.c source file, the MCC generated configuration for SPI1, DMA1, PWM1_16BIT, TMR2, and UART1, and the project settings needed to build with the XC8 compiler. To open it, unzip the folder somewhere on your computer, launch MPLAB X, and use File then Open Project to point at the unzipped folder.</p>
 
 
 
@@ -777,6 +890,8 @@
 
 
 
+  
+  
 
 
 
