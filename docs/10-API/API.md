@@ -1,164 +1,115 @@
-# API
-
-## Overview
-
-This page documents the message API for the **Sable Audio Subsystem** (Microphone).  
-My subsystem reads audio data from an ICS43434 I2S digital microphone and broadcasts
-audio samples to the team over the daisy-chain UART network.
-
-### Packet Structure (Class Protocol)
-
-All messages follow the class-wide protocol:
-
-| Byte | Value | Description |
-|------|-------|-------------|
-| 0 | `0x41` | Prefix byte 1 |
-| 1 | `0x5A` | Prefix byte 2 |
-| 2 | Source ID | Sender's node address |
-| 3 | Dest ID | Receiver's node address (0xFF = broadcast) |
-| 4–61 | Message Data | Up to 58 bytes of message content |
-| 62 | `0x59` | Suffix byte 1 |
-| 63 | `0x42` | Suffix byte 2 |
-
-> My subsystem's **Source ID is 0x06** (Microphone/Audio node).  
-> Messages I send are **broadcast** (Dest ID = 0xFF).
-
+---
+title: API
 ---
 
-## Messages I Send
+## API
 
-### Message Type 6 — Microphone Audio Stream
+This page lists the messages that the Audio Subsystem sends, receives, and passes along on the team's daisy chained UART network. Every message follows the class wide protocol frame, which is 64 bytes long. The first two bytes are 0x41 and 0x5A. The next two bytes are the source ID and the destination ID. Bytes 4 through 61 hold the message data. The last two bytes are 0x59 and 0x42. The tables below show only the message data part. The prefix, suffix, source, and destination bytes are the same for every member of the class and are not shown.
 
-This message is broadcast to all nodes whenever a new audio sample is captured
-from the ICS43434 I2S microphone.
+### Subsystem ID
 
-|  | Byte 1 | Byte 2 | Bytes 3–4 |
-|--|--------|--------|-----------|
-| **Variable Name** | `message_type` | `reserved` | `audio` |
-| **Variable Type** | `uint8_t` | `uint8_t` | `uint16_t` |
-| **# of Bytes** | 1 | 1 | 2 |
-| **Min Value** | 6 | 0 | 0 |
-| **Max Value** | 6 | 0 | 65535 |
-| **Example** | 6 | 0 | 32768 |
+| Member | ID Character | Hex |
+|--------|--------------|-----|
+| Vedaa (Audio Subsystem, me) | V | 0x56 |
+| Khalid | K | 0x4B |
+| Armando | A | 0x41 |
+| Mohammed | M | 0x4D |
+| Cyrus | C | 0x43 |
+| Logan | L | 0x4C |
+| Broadcast (everyone) | X | 0x58 |
 
-**Field descriptions:**
-- `message_type`: Always `6` for this message type
-- `reserved`: Unused byte, always `0`
-- `audio`: 16-bit unsigned audio sample captured from ICS43434 microphone (0 = silence, 65535 = max amplitude)
+### Messages Sent by the Audio Subsystem
 
----
+#### Message Type 6: Microphone Audio Feed Stream Information
 
-## Messages I Receive
+This message is sent out to everyone on the team about twice per second. It tells the rest of the team if the microphone is currently picking up sound louder than the noise gate. The message is 7 bytes long. The first byte is the message type, which is always 6. The next 6 bytes are ASCII characters that spell either MIC_ON when sound is detected or MICOFF when the room is quiet.
 
-My subsystem does not have any message types specifically addressed to it.  
-However, the receiver must handle **all messages** on the daisy chain according to the protocol:
+| | Byte 1 | Byte 2 | Byte 3 | Byte 4 | Byte 5 | Byte 6 | Byte 7 |
+|---|--------|--------|--------|--------|--------|--------|--------|
+| Variable Name | message_type | mic_state[0] | mic_state[1] | mic_state[2] | mic_state[3] | mic_state[4] | mic_state[5] |
+| Variable Type | uint8_t | char | char | char | char | char | char |
+| Min Value | 6 | M (0x4D) | I (0x49) | C (0x43) | _ (0x5F) | O (0x4F) | F (0x46) |
+| Max Value | 6 | M (0x4D) | I (0x49) | C (0x43) | _ (0x5F) | O (0x4F) | N (0x4E) |
+| Example (sound) | 6 | M | I | C | _ | O | N |
+| Example (quiet) | 6 | M | I | C | O | F | F |
 
-- **Pass on** messages intended for someone else
-- **Discard** messages that originated from me (source ID = 0x06 looping back)
-- **Ignore** malformed messages (wrong prefix/suffix, oversized, or out-of-frame bytes)
+Source: V (Audio Subsystem)
+Destination: X (Broadcast)
+Full frame example when sound is detected: A Z V X 6 M I C _ O N Y B
 
-For awareness, the other message types on the network are:
+The team's original message page lists Type 6 as a 16 bit number in bytes 3 and 4. The audio subsystem ended up sending a short text string instead, since sending raw audio over UART is too slow to be useful for a quick status check. The team page should be updated so the other subsystems read this message correctly.
 
-| Message Type | Description |
-|---|---|
-| 1 | Arm XYZ position → Armando |
-| 2 | Arm XYZ position (Armando → HMI/Webuser) |
-| 3 | Speed and movement type → Khalid |
-| 4 | Speed and movement type (Khalid → HMI/Webuser) |
-| 5 | Video feed stream information |
-| **6** | **Microphone audio stream (MY MESSAGE)** |
-| 7 | Speaker audio # (Stretch Goal) |
+### Messages Received and Acted On by the Audio Subsystem
 
----
+The audio subsystem does not currently use any directed messages from other team members. Any message addressed to V is acknowledged but does not change the subsystem's behavior.
 
-## Handling Code
+If a future version adds remote control of microphone gain or a way to turn the mic on and off, the slot below is reserved for that purpose.
 
-### Message Receiver
+#### Message Type 8 (Reserved for future use): Microphone Control
 
-The receiver handles all incoming UART daisy-chain messages:
+| | Byte 1 | Byte 2 |
+|---|--------|--------|
+| Variable Name | message_type | mic_command |
+| Variable Type | uint8_t | uint8_t |
+| Min Value | 8 | 0 |
+| Max Value | 8 | 2 |
+| Example (turn off) | 8 | 0 |
+| Example (turn on) | 8 | 1 |
+| Example (calibrate) | 8 | 2 |
 
-```c
-// Pseudocode for message receiver
-#define MY_NODE_ID    0x06   // Microphone subsystem node ID
+This message type has not been assigned by the team yet. It is shown here only to plan for future use.
 
-void process_received_message(uint8_t* buf, uint8_t len) {
-    // Ignore messages larger than buffer
-    if (len > 64) return;
+### Messages Forwarded by the Audio Subsystem
 
-    // Validate prefix and suffix
-    if (buf[0] != 0x41 || buf[1] != 0x5A) return;
-    if (buf[62] != 0x59 || buf[63] != 0x42) return;
+The audio subsystem is part of the daisy chained UART network. It passes along any message whose destination byte is not V and whose source byte is not V. The forwarding logic does not look at the message data. The following message types are expected to pass through.
 
-    uint8_t source_id = buf[2];
-    uint8_t dest_id   = buf[3];
-    uint8_t msg_type  = buf[4];
+| Type | Description | Origin | Forwarded |
+|------|-------------|--------|-----------|
+| 1 | Arm position X, Y, Z (request) | HMI or Webuser | Yes |
+| 2 | Arm position X, Y, Z (from Armando) | Armando | Yes |
+| 3 | Speed and movement type (request) | HMI or Webuser | Yes |
+| 4 | Speed and movement type (from Khalid) | Khalid | Yes |
+| 5 | Video feed stream information | Cyrus or Logan | Yes |
+| 7 | Speaker audio sound effect number (stretch) | HMI or Webuser | Yes |
 
-    // Discard messages that originated from me (looped back)
-    if (source_id == MY_NODE_ID) return;
+The audio subsystem will also forward Type 6 messages that it did not send itself, in case a second mic is ever added to the system.
 
-    // Pass on messages not intended for me
-    if (dest_id != MY_NODE_ID && dest_id != 0xFF) {
-        uart_send(buf, len);
-        return;
-    }
+### Error Handling
 
-    // Process messages intended for me (broadcast or direct)
-    // (No specific message types addressed to my node currently)
-    // Acknowledge receipt for debugging
-    acknowledge_message(msg_type, source_id);
-}
-```
+The receiver follows these rules.
 
-### Message Sender
+1. If byte 2 is not one of V, K, A, M, C, L, or X, the message is thrown away because the source is not a known team member.
+2. If byte 2 is V, the message came from this subsystem and traveled all the way around the chain. The message is thrown away so it does not loop forever.
+3. If a frame is longer than the 64 byte buffer, it is thrown away. Bytes that arrive without a valid 0x41 0x5A prefix are also thrown away.
+4. If bytes 62 and 63 are not 0x59 and 0x42, the frame is malformed and is thrown away.
 
-The sender broadcasts audio samples at a rate controlled by a timer interrupt:
+The error case shown for the demo is rule 2. A message that comes back to the audio subsystem with V as its source is dropped, which keeps the daisy chain from forwarding the same frame in a circle.
 
-```c
-#define MY_NODE_ID     0x06  // Microphone subsystem node ID
-#define BROADCAST_ID   0xFF
-#define MSG_TYPE_AUDIO 6
-#define SEND_INTERVAL_MS 50  // Max send rate: 20 Hz
+### Acknowledgement Behavior
 
-void send_audio_message(uint16_t audio_sample) {
-    uint8_t packet[64] = {0};
+When a valid frame addressed to V is received, the firmware does the following.
 
-    // Prefix
-    packet[0] = 0x41;
-    packet[1] = 0x5A;
+1. Reads the message_type byte to figure out what kind of message it is.
+2. Updates the matching subsystem state if that type is implemented. None of the currently implemented types are addressed to V, so this step does not run today.
+3. Blinks the status LED on RC4 to show that a valid frame meant for V was received.
+4. Adds one to the internal counter g_word_count so the message count can be checked in the debugger.
 
-    // Addressing
-    packet[2] = MY_NODE_ID;   // Source: me (0x06)
-    packet[3] = BROADCAST_ID; // Dest: everyone (0xFF)
+When a frame is forwarded instead of processed, the LED does not blink. The frame is simply sent on to the next member of the daisy chain.
 
-    // Message data
-    packet[4] = MSG_TYPE_AUDIO;   // message_type
-    packet[5] = 0x00;             // reserved
-    packet[6] = (audio_sample >> 8) & 0xFF;  // audio high byte
-    packet[7] = audio_sample & 0xFF;          // audio low byte
+### Source Code
 
-    // Suffix
-    packet[62] = 0x59;
-    packet[63] = 0x42;
+The full firmware is packaged as an MPLAB X project.
 
-    uart_send(packet, 64);
-}
+[Download AUDIOSUB.zip](AUDIOSUB.zip)
 
-// Timer interrupt — called every SEND_INTERVAL_MS
-void __interrupt() timer_isr(void) {
-    if (TMR0IF) {
-        TMR0IF = 0;
-        uint16_t sample = read_i2s_microphone();
-        send_audio_message(sample);
-        reload_timer();
-    }
-}
-```
+The message handling code lives in main.c. The important pieces are listed below.
 
----
+uart1_setup sets up the UART1 pins on RC6 and RC7 at the team's standard baud rate.
 
+uart_rx_fwd reads bytes from the UART receive register and pushes them into a small ring buffer for forwarding.
 
-## Resources
+uart_poll is a non blocking transmit routine. It sends bytes from the forwarding buffer first and then sends any frames the audio subsystem generated on its own.
 
-- [Team Website](https://egr314-s-2026-303.github.io/)
-- [Protocol Specification](https://embedded-systems-design.bitbucket.io)
+uart_queue builds a Type 6 frame with either MIC_ON or MICOFF whenever the noise gate state changes.
 
+uart_loopback_test runs once at startup. It sends and reads back 12 bytes locally to confirm the UART hardware works before the main loop starts.
