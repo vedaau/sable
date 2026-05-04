@@ -56,6 +56,11 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
+         <loc>https://embedded-systems-design.github.io/EGR314DataSheetTemplate/11-Hardware-V2.0/Hardware-V2.0/</loc>
+         <lastmod>2026-05-04</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
          <loc>https://embedded-systems-design.github.io/EGR314DataSheetTemplate/Appendix/</loc>
          <lastmod>2026-05-04</lastmod>
          <changefreq>daily</changefreq>
