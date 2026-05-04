@@ -701,70 +701,70 @@
 <table>
 <thead>
 <tr>
-<th>ESP Info</th>
+<th>PIC Info</th>
 <th>Answer</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Model</td>
-<td>ESP32-S33-WROOM-1-N4</td>
+<td>PIC18F27Q43-I/SS</td>
 </tr>
 <tr>
 <td>Product Page URL</td>
-<td>Found on <a href="https://www.espressif.com/en/products/socs/esp32-s3">Espressif.com</a></td>
+<td><a href="https://www.microchip.com/en-us/product/pic18f27q43">Microchip PIC18F27Q43</a></td>
 </tr>
 <tr>
-<td>ESP32-S3-WROOM-1-N4 Datasheet URL</td>
-<td><a href="https://documentation.espressif.com/esp32-s3-wroom-1_wroom-1u_datasheet_en.pdf">ESP32-S3-WROOM-1-N4 Datasheet</a></td>
+<td>PIC18F27Q43 Datasheet URL</td>
+<td><a href="https://ww1.microchip.com/downloads/aemDocuments/documents/MCU08/ProductDocuments/DataSheets/PIC18F27_47Q43-Data-Sheet-DS40002147.pdf">PIC18F27Q43 Datasheet</a></td>
 </tr>
 <tr>
-<td>ESP32-S3 Datasheet URL</td>
-<td><a href="https://documentation.espressif.com/esp32-s3_datasheet_en.pdf">ESP32-S3 Datasheet</a></td>
+<td>PIC18-Q43 Family Reference</td>
+<td><a href="https://www.microchip.com/en-us/parametric-search/v3?series=PIC18-Q43">PIC18-Q43 Product Family Page</a></td>
 </tr>
 <tr>
-<td>ESP32-S3 Technical Reference Manual URL</td>
-<td><a href="https://documentation.espressif.com/esp32-s3_technical_reference_manual_en.pdf">ESP32-S3 Manual</a></td>
+<td>MPLAB X IDE / MCC Documentation</td>
+<td><a href="https://microchipdeveloper.com/mplabx:start">MPLAB X IDE Documentation</a></td>
 </tr>
 <tr>
 <td>Vendor link</td>
-<td><a href="https://www.digikey.com/en/products/detail/espressif-systems/ESP32-S3-WROOM-1-N4/16162639">Digikey</a></td>
+<td><a href="https://www.newark.com/microchip/pic18f27q43-i-ss/mcu-8bit-64mhz-dip-28/dp/01AH3802?CMP=AFC-DIGIPART">Newark</a></td>
 </tr>
 <tr>
 <td>Code Examples</td>
-<td><a href="https://github.com/atomic14/esp32_audio">Code for reading audio samples via ESP32 ADC</a></td>
+<td><a href="https://mplab-discover.microchip.com/">Microchip MPLAB Discover Examples</a>, <a href="https://www.microchip.com/en-us/application-notes">PIC18F-Q43 I²S via SPI Application Note</a></td>
 </tr>
 <tr>
 <td>External Resources URL(s)</td>
-<td><a href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/api-reference/peripherals/adc/index.html">ESP32-S3 ADC documentation</a>, <a href="https://docs.espressif.com/projects/esp-idf/en/v4.3/esp32/api-reference/peripherals/uart.html">ESP32 UART programming guide</a>, <a href="https://assets.alliedelec.com/image/upload/v1576062544/Datasheets/4f9566e4b3d0a2191a58ed099a30218b.pdf">Microphone Component datasheet</a></td>
+<td><a href="https://onlinedocs.microchip.com/oxy/GUID-5A41FAB1-94F6-4574-A89F-B16D24330BB7-en-US-2/index.html">MCC Melody User Guide</a>, <a href="https://invensense.tdk.com/wp-content/uploads/2016/02/DS-000069-ICS-43434-v1.2.pdf">ICS-43434 Microphone Datasheet</a>, <a href="https://onlinedocs.microchip.com/oxy/GUID-9A1A39D4-F5A9-4AB5-89CC-20C51E2EECD5-en-US-2/index.html">PIC18F27Q43 SPI/I²S Configuration Guide</a></td>
 </tr>
 <tr>
 <td>Unit cost</td>
-<td>$5.06</td>
+<td>$2.43</td>
 </tr>
 <tr>
 <td>Absolute Maximum Current for entire IC</td>
-<td>500 mA</td>
+<td>250 mA</td>
 </tr>
 <tr>
 <td>Supply Voltage Range</td>
-<td>3V-3.6V</td>
+<td>1.8V – 5.5V</td>
 </tr>
 <tr>
 <td>Absolute Maximum current <br> (for entire IC)</td>
-<td>500 mA</td>
+<td>250 mA</td>
 </tr>
 <tr>
 <td>Maximum GPIO current <br> (per pin)</td>
-<td>20 mA</td>
+<td>50 mA (source/sink)</td>
 </tr>
 <tr>
 <td>Supports External Interrupts?</td>
-<td>Yes</td>
+<td>Yes (Interrupt-on-Change on most pins, plus dedicated INT0/INT1/INT2)</td>
 </tr>
 <tr>
 <td>Required Programming Hardware, Cost, URL</td>
-<td><a href="https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/get-started/index.html">link</a></td>
+<td><a href="https://www.microchip.com/en-us/development-tool/pg164100">MPLAB Snap In-Circuit Debugger – $34.95</a></td>
 </tr>
 </tbody>
 </table>
@@ -780,49 +780,61 @@
 <tbody>
 <tr>
 <td>UART</td>
-<td>3</td>
+<td>5</td>
 <td>1</td>
-<td>GPIO 18</td>
+<td>RC6 (TX), RC7 (RX)</td>
 </tr>
 <tr>
-<td>external SPI</td>
-<td>4</td>
-<td>0</td>
-<td>-</td>
+<td>SPI</td>
+<td>2</td>
+<td>1</td>
+<td>RB3 (SCK), RB4 (SDI) — used for I²S emulation</td>
 </tr>
 <tr>
-<td>I2C</td>
+<td>I²C</td>
 <td>2</td>
 <td>0</td>
 <td>-</td>
 </tr>
 <tr>
 <td>GPIO</td>
-<td>45</td>
-<td>4</td>
-<td>GPIO 1,2,5,6</td>
+<td>25</td>
+<td>5</td>
+<td>RA0–RA5 (extra headers), RB5 (WS output)</td>
 </tr>
 <tr>
 <td>ADC</td>
-<td>20</td>
-<td>1</td>
-<td>GPIO 4</td>
+<td>1 (with 35 channels)</td>
+<td>0</td>
+<td>-</td>
 </tr>
 <tr>
-<td>LED PWM</td>
+<td>PWM (16-bit)</td>
+<td>4</td>
+<td>1</td>
+<td>RB5 (PWM1_16BIT Output1 → I²S WS)</td>
+</tr>
+<tr>
+<td>DMA</td>
 <td>8</td>
 <td>1</td>
-<td>GPIO 12</td>
+<td>DMA1: SPI1RXB → RAM buffer</td>
 </tr>
 <tr>
-<td>USB Programmer</td>
+<td>Timer</td>
+<td>6</td>
+<td>1</td>
+<td>TMR2 (PWM clock source)</td>
+</tr>
+<tr>
+<td>Programmer Interface</td>
 <td>1</td>
 <td>1</td>
-<td>GPIO 20</td>
+<td>MCLR (RE3), PGC1 (RB6), PGD1 (RB7)</td>
 </tr>
 </tbody>
 </table>
-<p>The ESP32 works well for my Microphone Subsystem because it provides sufficient processing capability in a compact design while offering multiple analog and digital I/O options. The RS PRO 7542100 microphone is an analog electret microphone so the ESP32’s built-in ADC will be used to sample the audio signal. The microcontroller processes the captured audio data and transmits it to the main system through UART communication. Additional GPIO and PWM-capable pins can be used to control a debug/status LED for subsystem feedback. Overall, the ESP32 provides the flexibility needed to interface with the analog microphone, process audio signals, and communicate reliably with the rest of the system.</p>
+<p>The PIC18F27Q43 was selected for the Audio (Microphone) Subsystem because it provides the peripheral mix needed to interface a digital I²S microphone (ICS-43434) without requiring a more expensive 32-bit MCU. Although the PIC18-Q43 family does not have a dedicated I²S peripheral, its SPI module combined with a 16-bit PWM and the on-chip DMA controller allows the I²S protocol to be emulated in hardware: SPI1 generates the bit clock and shifts in serial data on RB3/RB4, the PWM1_16BIT module produces the 32 kHz word-select signal on RB5, and DMA1 streams received bytes from the SPI receive buffer directly into RAM with no CPU intervention. UART1 (RC6/RC7) is used to forward processed audio data to the rest of the robot over the daisy-chained subsystem bus, and additional GPIO is reserved for status indication and interfacing with the Human-Machine Interface. The 64 MHz internal oscillator provides enough headroom to handle continuous audio capture at 32 kHz / 24-bit while leaving CPU cycles available for buffer processing and communication, making the PIC18F27Q43 a cost-effective and well-matched choice for this subsystem.</p>
 
 
 
