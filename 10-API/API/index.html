@@ -1246,7 +1246,7 @@ Full frame example when sound is detected: A Z V X 6 M I C _ O N Y B</p>
 <p>When a frame is forwarded instead of processed, the LED does not blink. The frame is simply sent on to the next member of the daisy chain.</p>
 <h3 id="source-code">Source Code</h3>
 <p>The full firmware is packaged as an MPLAB X project.</p>
-<p><a href="AUDIOSUB.zip">Download AUDIOSUB.zip</a></p>
+<p><a href="../AUDIOSUB.zip">Download AUDIOSUB.zip</a></p>
 <p>The message handling code lives in main.c. The important pieces are listed below.</p>
 <p>uart1_setup sets up the UART1 pins on RC6 and RC7 at the team's standard baud rate.</p>
 <p>uart_rx_fwd reads bytes from the UART receive register and pushes them into a small ring buffer for forwarding.</p>
