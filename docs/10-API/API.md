@@ -13,9 +13,9 @@ This page lists the messages that the Audio Subsystem sends, receives, and passe
 | Vedaa (Audio Subsystem, me) | V | 0x56 |
 | Khalid | K | 0x4B |
 | Armando | A | 0x41 |
-| Mohammed | M | 0x4D |
-| Cyrus | C | 0x43 |
-| Logan | L | 0x4C |
+| Matthew | M | 0x4D |
+| Manny | C | 0x43 |
+| Lia | L | 0x4C |
 | Broadcast (everyone) | X | 0x58 |
 
 ### Messages Sent by the Audio Subsystem
@@ -69,7 +69,7 @@ The audio subsystem is part of the daisy chained UART network. It passes along a
 | 2 | Arm position X, Y, Z (from Armando) | Armando | Yes |
 | 3 | Speed and movement type (request) | HMI or Webuser | Yes |
 | 4 | Speed and movement type (from Khalid) | Khalid | Yes |
-| 5 | Video feed stream information | Cyrus or Logan | Yes |
+| 5 | Video feed stream information | Manny or Lia | Yes |
 | 7 | Speaker audio sound effect number (stretch) | HMI or Webuser | Yes |
 
 The audio subsystem will also forward Type 6 messages that it did not send itself, in case a second mic is ever added to the system.
