@@ -5,11 +5,11 @@ tags:
 - tag2
 ---
 <center>
-<font size= "6">Vedaa Ubale's Datasheet</font><br>
+<font size="6" face="Georgia">Vedaa Ubale's Datasheet</font><br>
 as part of<br>
-<font size= "8"> Sable </font><br>
+<font size="8" face="Impact">Sable</font><br>
 for<br>
-<font size= "5"> Team 303 </font><br>
+<font size="5" face="Courier New">Team 303</font><br>
 **Submission: May 4, 2026**
 </center>
 
