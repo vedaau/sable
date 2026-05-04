@@ -22,7 +22,7 @@ The following sections describe the major components used in the Audio(microphon
 
 **Selected Sensor: ICS-43434 Digital I²S MEMS Microphone**
 
-<img src="https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/916/MFG_ICS-43434_sml.jpg" 
+<img src="https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/002/379/783/MFG_ICS-43434_sml.jpg" 
      width="300" 
      alt="Product Image">
 
@@ -52,7 +52,7 @@ The following sections describe the major components used in the Audio(microphon
 
 | **Component**                                                                                                                                                                                      | **Pros**                                                                                                                                    | **Cons**                                                                                            |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| ![](https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/916/MFG_ICS-43434_sml.jpg)<br>Option 1.<br> ICS-43434 Digital I²S MEMS Microphone <br>$3.20/each<br>[link to product](https://www.digikey.com/en/products/detail/tdk-invensense/ICS-43434/6140298)                 | Digital I²S output (no analog noise pickup) <br><br> High SNR (65 dB) <br><br> Built-in 24-bit ADC <br><br> Wide frequency range (50 Hz – 20 kHz) <br><br> Low power consumption | Higher cost than analog mics <br><br> Requires I²S-capable controller <br><br> More complex firmware setup |        
+| ![](https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/002/379/783/MFG_ICS-43434_sml.jpg)<br>Option 1.<br> ICS-43434 Digital I²S MEMS Microphone <br>$3.20/each<br>[link to product](https://www.digikey.com/en/products/detail/tdk-invensense/ICS-43434/6140298)                 | Digital I²S output (no analog noise pickup) <br><br> High SNR (65 dB) <br><br> Built-in 24-bit ADC <br><br> Wide frequency range (50 Hz – 20 kHz) <br><br> Low power consumption | Higher cost than analog mics <br><br> Requires I²S-capable controller <br><br> More complex firmware setup |        
 | ![](https://mm.digikey.com/Volume0/opasdata/d220001/derivates/2/001/212/MFG_MFG_CMA-4544PF-W%28640x640%29.jpg?hidebanner=true)<br> Option 2. <br> CMA-4544PF-W Microphone <br> $0.76/each <br> [Link to product](https://www.digikey.com/en/products/detail/same-sky-formerly-cui-devices-/CMA-4544PF-W/1869981) |  Good sound range <br><br> Low power use <br><br> Omnidirectional | Sensitive to Noise <br><br> Basic audio quality <br><br> Limited temperature range|
 | ![](https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/010/508/MFG_CMEJ-0413-42-SMT-TR_sml.jpg)<br> Option 3. <br> CMEJ-0413-42-SMT-TR Microphone <br> $0.59/each <br> [Link to product](https://www.digikey.com/en/products/detail/same-sky-formerly-cui-devices-/CMEJ-0413-42-SMT-TR/10253448) |  Low Cost <br><br> Omnidirectional Pickup <br><br> Very Compact & Easy to Integrate <br><br> Good for general sound |  Limited frequency range <br><br> not suitable for professional audio <br><br> more noise and lower dynamic range |   
 
