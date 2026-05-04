@@ -8,7 +8,7 @@ The following sections describe the major components used in the Audio(microphon
 
 ### Power Management
 
-**Selected Voltage Switchimg Regulator: LM2575GR-3.3V Regulator**
+**Selected Voltage Switching Regulator: LM2575GR-3.3V Regulator**
 
 <img src="https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/001/176/122/MFG_TO-263-5L_sml%28200x200%29.jpg" 
      width="300" 
@@ -20,14 +20,14 @@ The following sections describe the major components used in the Audio(microphon
 
 ### Microphone
 
-**Selected Sensor:  CMEJ-0413-42-SMT-TR Microphone**
+**Selected Sensor: ICS-43434 Digital I²S MEMS Microphone**
 
-<img src="https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/010/508/MFG_CMEJ-0413-42-SMT-TR_sml.jpg" 
+<img src="https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/916/MFG_ICS-43434_sml.jpg" 
      width="300" 
      alt="Product Image">
 
 
- [Link to product](https://www.digikey.com/en/products/detail/same-sky-formerly-cui-devices-/CMEJ-0413-42-SMT-TR/10253448)  
+ [Link to product](https://www.digikey.com/en/products/detail/tdk-invensense/ICS-43434/6140298)  
 
 
 
@@ -45,17 +45,17 @@ The following sections describe the major components used in the Audio(microphon
 
 **Choice:** Option 1: LM2575GR-3.3V Regulator
 
-**Rationale:** The LM2575GR-3.3V Regulator was chosen because it efficiently converts higher voltages to 3.3 V with low heat loss, and it can supply up to about 1 amp for microcontrollers and other circuits. It works from a wide range of input voltages and only needs a few extra parts, which is useful for most power supply designs. While not the smallest or newest part, it’s simple and reliable for stepping down to 3.3 V in many embedded projects.
+**Rationale:** The LM2575GR-3.3V Regulator was chosen because it efficiently converts higher voltages to 3.3 V with low heat loss, and it can supply up to about 1 amp for microcontrollers and other circuits. It works from a wide range of input voltages and only needs a few extra parts, which is useful for most power supply designs. While not the smallest or newest part, it's simple and reliable for stepping down to 3.3 V in many embedded projects.
 
 
 **Microphone**
 
 | **Component**                                                                                                                                                                                      | **Pros**                                                                                                                                    | **Cons**                                                                                            |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| ![](https://res.cloudinary.com/rsc/image/upload/b_rgb:FFFFFF,c_pad,dpr_1.0,f_auto,q_auto,w_700/c_pad,w_700/F7542100-01)<br>Option 1.<br> RS PRO 7542100 Microphone <br>$0.61/each<br>[link to product](https://us.rs-online.com/product/rs-pro/7542100/71815654/?gclsrc=aw.ds&gad_source=1&gad_campaignid=22593105799&gbraid=0AAAAAD-9z7Fd9Zc_kUm8eCjX4V2buscHA&gclid=EAIaIQobChMIm4HlmtyGkAMVwTlECB1H-ABrEAQYASABEgLx1_D_BwE)                 | Low cost & compact <br><br> Omnidirectional sound pickup <br><br> Low power requirement <br><br> Easy to integrate   | Not ideal for high-quality recordings <br><br> Noise limitations |        
-| ![](https://mm.digikey.com/Volume0/opasdata/d220001/derivates/2/001/212/MFG_MFG_CMA-4544PF-W%28640x640%29.jpg?hidebanner=true)<br> Option 2. <br> CMA-4544PF-W Microphone <br> $0.76/each <br> [Link to product](https://www.digikey.com/en/products/detail/same-sky-formerly-cui-devices-/CMA-4544PF-W/1869981?gclsrc=aw.ds&gad_source=1&gad_campaignid=20243136172&gbraid=0AAAAADrbLlj1J1-wrnvGXGv0h4K-eIZg2&gclid=Cj0KCQjwjL3HBhCgARIsAPUg7a68c1BZp6LEFrLCHPUIop5vsIPro80buftPfndr3yCjhH8FneqTxqMaAmJ3EALw_wcB) |  Good sound range <br><br> Low power use <br><br> Omnidirectional | Sensitive to Noise <br><br> Basic audio quality <br><br> Limited temperature range|
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| ![](https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/916/MFG_ICS-43434_sml.jpg)<br>Option 1.<br> ICS-43434 Digital I²S MEMS Microphone <br>$3.20/each<br>[link to product](https://www.digikey.com/en/products/detail/tdk-invensense/ICS-43434/6140298)                 | Digital I²S output (no analog noise pickup) <br><br> High SNR (65 dB) <br><br> Built-in 24-bit ADC <br><br> Wide frequency range (50 Hz – 20 kHz) <br><br> Low power consumption | Higher cost than analog mics <br><br> Requires I²S-capable controller <br><br> More complex firmware setup |        
+| ![](https://mm.digikey.com/Volume0/opasdata/d220001/derivates/2/001/212/MFG_MFG_CMA-4544PF-W%28640x640%29.jpg?hidebanner=true)<br> Option 2. <br> CMA-4544PF-W Microphone <br> $0.76/each <br> [Link to product](https://www.digikey.com/en/products/detail/same-sky-formerly-cui-devices-/CMA-4544PF-W/1869981) |  Good sound range <br><br> Low power use <br><br> Omnidirectional | Sensitive to Noise <br><br> Basic audio quality <br><br> Limited temperature range|
 | ![](https://mm.digikey.com/Volume0/opasdata/d220001/derivates/1/010/508/MFG_CMEJ-0413-42-SMT-TR_sml.jpg)<br> Option 3. <br> CMEJ-0413-42-SMT-TR Microphone <br> $0.59/each <br> [Link to product](https://www.digikey.com/en/products/detail/same-sky-formerly-cui-devices-/CMEJ-0413-42-SMT-TR/10253448) |  Low Cost <br><br> Omnidirectional Pickup <br><br> Very Compact & Easy to Integrate <br><br> Good for general sound |  Limited frequency range <br><br> not suitable for professional audio <br><br> more noise and lower dynamic range |   
 
-**Choice:** Option 3: CMEJ-0413-42-SMT-TR Microphone
+**Choice:** Option 1: ICS-43434 Digital I²S MEMS Microphone
 
-**Rationale:** The CMEJ-0413-42-SMT-TR microphone was chosen because it is small, cheap, and easy to use. It picks up sound from all directions and works well for basic voice or environmental sound. Its low power needs and small size make it good for compact devices. While it is not high-quality audio and has a limited frequency range, it is reliable for simple sound detection.
+**Rationale:** The ICS-43434 was chosen because it provides high-quality digital audio output directly over I²S, eliminating the need for an external ADC or analog signal conditioning circuitry. With a 65 dB signal-to-noise ratio and a flat frequency response from 50 Hz to 20 kHz, it captures clear human speech at conversational distances, which directly supports the subsystem's goal of detecting and transmitting audio from survivors. Its digital interface is robust against electrical noise from nearby motors and switching regulators, which is important in a robotics platform where analog mic signals would otherwise pick up interference. While more expensive than analog electret options, the improved audio clarity, integrated 24-bit ADC, and noise immunity justify the cost for this application.
