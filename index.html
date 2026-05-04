@@ -882,27 +882,26 @@
 as part of<br>
 <font size="8"> Sable </font><br>
 for<br>
-<font size="5"> Team 303 </font><br><p></p>
-<p><strong>Submission: January, 18, 2026</strong>
-</p></center><p></p>
+<font size="5"> Team 303 </font><br>
+<strong>Submission: January, 18, 2026</strong>
+</center><p></p>
 <h2 id="introduction">Introduction</h2>
-<ul>
-<li><strong>This needs to be updated so that a reader gets an idea of the purpose of this datasheet.</strong></li>
-</ul>
+<p>This datasheet documents my individual contribution to the Sable project, which is a search and rescue robot designed by Team 303 for EGR 314. The site brings together every step of the design process for my subsystem, from the early block diagram through the final firmware. Each page captures the decisions I made, the parts I selected, and the reasoning behind them, so that anyone reviewing the project can follow the path from initial requirements to a working board. This datasheet is meant to be read alongside the team report, which describes how all six subsystems fit together into the complete robot.</p>
 <h3 id="project-summary">Project Summary</h3>
-<ul>
-<li>This needs to be updated to reflect <ins>your version</ins> of the team project, so when shared not via the team's report, the reader gets an idea of the direction of the project and how your work will contribute to the overall success.</li>
-<li>Add context that ties into the link to your <a href="https://egr314-s-2026-303.github.io/">team report.</a></li>
-</ul>
+<p>The Sable project is a small mobile robot built to help locate survivors in disaster scenarios. It moves through tight spaces, captures audio and video from the environment, and reports what it finds back to a human operator over a wireless link. The robot is split into six subsystems, each owned by one team member, that talk to one another over a shared UART daisy chain. My role on the team is to build the Audio Subsystem, which is responsible for capturing clear audio from the environment so that the operator can hear sounds from a survivor or from the area around the robot. The audio subsystem also passes messages between other subsystems on the network, so it has to be reliable and fast enough not to slow down communication for the rest of the team. More information about how all the subsystems work together is available in the <a href="https://egr314-s-2026-303.github.io/">team report</a>.</p>
 <h3 id="my-contribution">My Contribution</h3>
-<p>My part in the Sable project was to design the Audio Subsystem. To do this, I researched and designed parts that would work together to...
-The following are the major steps I have taken in designing my subsystem:  </p>
+<p>My part in the Sable project was to design the Audio Subsystem. To do this, I selected a digital MEMS microphone, chose a microcontroller that could handle the audio data and communicate with the rest of the team, designed the supporting power and communication circuitry, and wrote firmware to capture, process, and forward audio related information. The following are the major steps I took in designing my subsystem.</p>
 <ul>
-<li>To view my Block Diagram, click <a href="https://vedaau.github.io/02-Block-Diagram/Block-Diagram/">here</a>. This part of the design process shows the general idea of how my PCB will function and how it uses a motor and H-Bridge to open and close the lid and communicates with the External IR Sensor and UI Lights subsystem. </li>
-<li>To view my Component Selection, click <a href="https://vedaau.github.io/03-Component-Selection/Component-Selection/">here</a>. This part of the design process displays the major components needed to build my subsystem including the motor and supporting circuitry as well as the parts I reviewed to choose the best fit for my design.</li>
-<li>To review details about materials used in my part of the project, click <a href="https://vedaau.github.io/06-BOM/BOM/">here</a>. </li>
-<li>To view my Schematic, click <a href="https://vedaau.github.io/07-Schematic/schematic/">here</a>. This part of the design process shows the schematic for my subsystem, created using KiCad 9.0. </li>
-<li>To view my Power Budget, click <a href="https://vedaau.github.io/05-Power-Budget/Power-Budget/">here</a>. This part of the design process shows the expected power consumption of all components in my subsystem, used to select the correct fuse for the power supply.</li>
+<li>To view my <a href="https://vedaau.github.io/sable/02-Block-Diagram/Block-Diagram/">Block Diagram</a>, click here. This page shows the general idea of how my PCB will function and how it captures audio with the ICS-43434 microphone, processes it on the PIC18F27Q43 microcontroller, and shares status information with the rest of the robot over UART.</li>
+<li>To view my <a href="https://vedaau.github.io/sable/03-Component-Selection/Component-Selection/">Component Selection</a>, click here. This page displays the major components needed to build my subsystem, including the microphone and the voltage regulator, along with the parts I reviewed to choose the best fit for my design.</li>
+<li>To view my <a href="https://vedaau.github.io/sable/04-Microcontroller-Selection/Microcontroller-Selection/">Microcontroller Selection</a>, click here. This page describes the PIC18F27Q43 microcontroller, why I picked it for the audio subsystem, and which peripherals I planned to use.</li>
+<li>To view my <a href="https://vedaau.github.io/sable/05-Power-Budget/Power-Budget/">Power Budget</a>, click here. This page shows the expected power consumption of all components in my subsystem and confirms that the LM2575 regulator and the 12V wall supply have enough headroom to run everything safely.</li>
+<li>To view my <a href="https://vedaau.github.io/sable/06-BOM/BOM/">Bill of Materials</a>, click here. This page lists every component used in the audio subsystem along with quantities and sources.</li>
+<li>To view my <a href="https://vedaau.github.io/sable/07-Schematic/schematic/">Schematic</a>, click here. This page shows the schematic for my subsystem, created in KiCad 9.0.</li>
+<li>To view my <a href="https://vedaau.github.io/sable/08-API/API/">API</a>, click here. This page lists every message my subsystem sends, receives, and forwards on the team's UART network, along with the byte by byte format of each message.</li>
+<li>To view my <a href="https://vedaau.github.io/sable/09-Reflection/Reflection/">Reflection</a>, click here. This page reviews which requirements were met, what I learned from the project, and what I would recommend to future students.</li>
+<li>To view my <a href="https://vedaau.github.io/sable/10-Hardware-V2/Hardware-V2/">Hardware V2.0</a> ideas, click here. This page describes the changes I would make if I were to design a second version of the audio subsystem hardware.</li>
+<li>To download the final source code and supporting files, visit the <a href="https://vedaau.github.io/sable/11-Resources/Resources/">Resources</a> page.</li>
 </ul>
 
 
