@@ -716,9 +716,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#microcontroller-module-startup-tip" class="md-nav__link">
+  <a href="#microcontroller-and-module-startup-tips" class="md-nav__link">
     <span class="md-ellipsis">
-      Microcontroller / Module Startup Tip
+      Microcontroller and Module Startup Tips
     </span>
   </a>
   
@@ -859,9 +859,9 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#microcontroller-module-startup-tip" class="md-nav__link">
+  <a href="#microcontroller-and-module-startup-tips" class="md-nav__link">
     <span class="md-ellipsis">
-      Microcontroller / Module Startup Tip
+      Microcontroller and Module Startup Tips
     </span>
   </a>
   
@@ -917,86 +917,86 @@
 
 <h2 id="reflection">Reflection</h2>
 <h3 id="review-of-modules-success">Review of Module's Success</h3>
-<p>Looking back on the original Audio Subsystem requirements, the module met most of its core goals, although a few stretch items were not fully realized.</p>
-<p><strong>Requirements successfully accomplished:</strong></p>
+<p>Looking back on the original Audio Subsystem requirements, the module met most of its core goals, even though a few stretch goals were not finished.</p>
+<p><strong>Requirements that were met:</strong></p>
 <ul>
-<li>The surface-mounted +3.3V switching regulator (LM2575GR-3.3) was implemented and produces a stable rail well within the ±5% tolerance specified in the requirements document.</li>
-<li>A surface-mounted PIC18F27Q43-I/SS microcontroller was selected, configured, and successfully programmed using MPLAB X IDE with MCC Melody.</li>
-<li>The microphone successfully captures audible human speech at conversational distance using the ICS-43434 I²S MEMS microphone.</li>
-<li>Peripheral communication using the I²S protocol was implemented by emulating I²S on the PIC18's SPI peripheral, with PWM1_16BIT generating the WS signal and DMA1 streaming received data into a RAM buffer with no CPU intervention.</li>
-<li>UART daisy-chain connectivity to the rest of the robot was wired through the U4 and U5 2x4 IDC connectors and verified at the schematic and pinout level.</li>
+<li>The surface mounted 3.3V switching regulator (LM2575GR 3.3) was built and produces a stable rail well within the plus or minus 5 percent tolerance from the requirements document.</li>
+<li>A surface mounted PIC18F27Q43 I/SS microcontroller was selected, set up in MCC Melody, and programmed using MPLAB X IDE.</li>
+<li>The microphone captures clear human speech at conversational distance using the ICS 43434 I2S MEMS microphone.</li>
+<li>I2S communication was set up by using the PIC SPI module to receive serial data, the PWM1_16BIT module to make the WS signal, and DMA1 to move bytes from the SPI receive buffer into RAM with no help from the CPU.</li>
+<li>UART daisy chain communication with the rest of the robot was wired through the U4 and U5 2x4 IDC connectors and checked at the schematic and pinout level.</li>
 </ul>
-<p><strong>Requirements that were missed or only partially met:</strong></p>
+<p><strong>Requirements that were missed or only partly met:</strong></p>
 <ul>
-<li>The wireless communication stretch goal (Wi-Fi via MQTT) was not implemented within this subsystem since the PIC18-Q43 has no on-board Wi-Fi and that responsibility was left to a different subsystem.</li>
-<li>The speaker stretch requirement was not completed; the audio output path through the on-board op-amp section was designed in the schematic but not validated for the 90 dB / 2–5 kHz target.</li>
-<li>The ground vibration detection stretch requirement was not pursued because the necessary sensor hardware (geophone or accelerometer) was outside the scope of the parts ordered.</li>
-<li>HMI integration was wired at the connector level but not exercised through complete software integration with the OLED and pushbutton subsystem before the deadline.</li>
+<li>The Wi Fi stretch goal was not done in this subsystem because the PIC18 Q43 has no Wi Fi built in. That job was left to a different subsystem on the team.</li>
+<li>The speaker stretch goal was not finished. The audio output path through the on board op amp section was drawn in the schematic but never tested at the 90 dB and 2 to 5 kHz target.</li>
+<li>The ground vibration detection stretch goal was not pursued because the sensor hardware needed (a geophone or an accelerometer) was not part of the parts order.</li>
+<li>HMI integration was wired up at the connector level but was not fully tested with the OLED and pushbutton subsystem before the deadline.</li>
 </ul>
-<h3 id="microcontroller-module-startup-tip">Microcontroller / Module Startup Tip</h3>
-<p>A few tips that would have saved significant time at the beginning of the project:</p>
+<h3 id="microcontroller-and-module-startup-tips">Microcontroller and Module Startup Tips</h3>
+<p>A few tips that would have saved a lot of time at the start of the project:</p>
 <ul>
-<li><strong>Read the peripheral documentation before configuring anything in MCC.</strong> MCC Melody hides a lot of complexity, but the option names differ from older MCC and from the datasheet, and guessing at field meanings wastes hours. Open the <code>dma1.c</code> or <code>spi1.c</code> generated file after every change to confirm the registers actually look right.</li>
-<li><strong>The PIC18F27Q43 does not have a native I²S peripheral.</strong> Plan for SPI + PWM + DMA emulation from the start — this changes the pin map, the clock budget, and the buffer parsing strategy. Discovering this halfway through is painful.</li>
-<li><strong>Check the <code>Destination Region</code> field in DMA before generating.</strong> If it is left as <code>SFR</code>, the DMA writes into a random register instead of your RAM buffer and silently does nothing useful. This single setting cost more debug time than any other.</li>
-<li><strong>The MPLAB Snap does not provide power to the target board.</strong> Always plug in the external supply before launching a debug session, and confirm the 3.3V rail with a multimeter before assuming the chip is even running.</li>
-<li><strong>Use <code>DMA1_TransferWithTriggerStart()</code>, not <code>DMA1_TransferStart()</code></strong> for hardware-triggered DMA. The former sets the SIRQEN bit; the latter just sets DGO and the transfer never arms on the SPI receive interrupt.</li>
-<li><strong>Verify clocks on a scope before debugging firmware.</strong> SCK, WS, and SD on the I²S bus should all be visibly toggling at the expected frequencies before any data inspection in the debugger is meaningful. If the clocks look wrong, no amount of buffer parsing will fix it.</li>
-<li><strong>MCC Melody field names do not always map cleanly to datasheet register names.</strong> When unsure which trigger source to pick or what a setting maps to, use the Register Initialization tab to read the actual register values and cross-reference the datasheet directly.</li>
-<li><strong>Do not use I²C and I²S interchangeably.</strong> They share no protocol, no pin count, and no timing. The naming similarity tricks people into thinking one can be substituted for the other; it cannot.</li>
-<li><strong>The ICS-43434's BCLK must be between roughly 2.048 MHz and 4.096 MHz</strong> for normal mode. Picking a sample rate that pushes BCLK outside this window will cause the mic to output nothing or output garbage, with no obvious error indication.</li>
-<li><strong>Set up UART printf early</strong> — even before the main feature works. Being able to see "buffer[0] = 0xXX" stream out over a serial terminal is dramatically faster than relying solely on the debugger's variable inspector, especially when the Snap throws warnings.</li>
+<li><strong>Read the peripheral documentation before setting anything up in MCC.</strong> MCC Melody hides a lot of complexity, but the field names are different from the older MCC and from the datasheet. Guessing at what a setting means wastes hours. Open the generated <code>dma1.c</code> or <code>spi1.c</code> file after every change and check that the registers actually look right.</li>
+<li><strong>The PIC18F27Q43 does not have a real I2S peripheral.</strong> Plan from the very start to fake I2S using SPI, PWM, and DMA together. This choice changes the pin map, the clock budget, and the way the buffer has to be parsed. Finding out halfway through is painful.</li>
+<li><strong>Check the Destination Region field in DMA before generating code.</strong> If it is left as SFR, the DMA writes into a random register instead of into the RAM buffer and silently does nothing useful. This one setting cost more debug time than anything else.</li>
+<li><strong>The MPLAB Snap does not power the target board.</strong> Always plug in the external supply before starting a debug session, and check the 3.3V rail with a multimeter before assuming the chip is even running.</li>
+<li><strong>Use <code>DMA1_TransferWithTriggerStart()</code>, not <code>DMA1_TransferStart()</code>.</strong> The first one sets the SIRQEN bit so the DMA arms on the SPI receive interrupt. The second one only sets DGO, and the transfer never fires.</li>
+<li><strong>Check the clocks on a scope before debugging firmware.</strong> SCK, WS, and SD on the I2S bus should all be visibly toggling at the right frequencies before any data check in the debugger is meaningful. If the clocks look wrong, no amount of buffer parsing will fix the problem.</li>
+<li><strong>MCC Melody field names do not always match the datasheet register names.</strong> When unsure which trigger source to pick or what a setting maps to, use the Register Initialization tab to read the actual register values and look them up in the datasheet directly.</li>
+<li><strong>Do not use I2C and I2S as if they are the same thing.</strong> They share no protocol, no pin count, and no timing. The names look alike, but the protocols are completely different and one cannot replace the other.</li>
+<li><strong>The ICS 43434 BCLK must sit between about 2.048 MHz and 4.096 MHz</strong> for normal mode. Picking a sample rate that pushes BCLK outside this window will cause the mic to output nothing or output garbage, with no clear error message.</li>
+<li><strong>Set up UART printf early, even before the main feature works.</strong> Being able to watch "buffer[0] = 0xXX" stream out over a serial terminal is much faster than relying only on the debugger variable window, especially when the Snap throws warnings.</li>
 </ul>
 <h3 id="lessons-learned">Lessons Learned</h3>
-<p>The following ten lessons summarize the most important takeaways from the audio subsystem effort:</p>
+<p>The following ten lessons sum up the most important takeaways from the audio subsystem work:</p>
 <ol>
 <li>
-<p><strong>Choose the microcontroller around the actual peripheral requirements, not just brand familiarity.</strong> The PIC18F27Q43 was inexpensive and accessible, but it lacked a native I²S peripheral and forced a workaround using SPI, PWM, and DMA together. Time spent emulating I²S could have been avoided by selecting a part with a dedicated I²S module, and that trade-off should be evaluated explicitly during component selection rather than discovered halfway through firmware development.</p>
+<p><strong>Pick the microcontroller based on what the peripherals actually need, not on what brand the team is most familiar with.</strong> The PIC18F27Q43 was cheap and easy to get, but it had no real I2S peripheral and forced a workaround using SPI, PWM, and DMA together. The time spent faking I2S could have been avoided by picking a chip with a real I2S module. That tradeoff should be looked at early during component selection, not discovered halfway through firmware work.</p>
 </li>
 <li>
-<p><strong>Schematic readability matters as much as schematic correctness.</strong> Several debugging sessions involved confusion about whether WS was on RB5 or RB6 because the labels in the original schematic photo were small and ambiguous. Clear pin labeling, consistent net names, and legible export resolution save hours during firmware bring-up and design review conversations.</p>
+<p><strong>A clear schematic matters as much as a correct schematic.</strong> Several debug sessions were lost trying to figure out whether WS was on RB5 or RB6 because the labels in the original schematic photo were small and easy to mix up. Clean pin labels, consistent net names, and a high resolution export save hours during firmware bring up and during design review conversations.</p>
 </li>
 <li>
-<p><strong>Datasheet specs constrain the system more than expected.</strong> The ICS-43434's minimum BCLK requirement of about 2.048 MHz forced the sample rate to stay at or above 32 kHz, which in turn fixed the WS frequency, the SPI clock divider, and the DMA buffer size. Reading the datasheet's "operating modes" section thoroughly before picking a sample rate would have made the entire configuration sequence feel less like guesswork.</p>
+<p><strong>Datasheet specs limit the design more than they look like they will.</strong> The ICS 43434 minimum BCLK of about 2.048 MHz forced the sample rate to stay at or above 32 kHz, which then fixed the WS frequency, the SPI clock divider, and the DMA buffer size. Reading the operating modes section of the datasheet carefully before picking a sample rate would have made the whole setup feel less like guesswork.</p>
 </li>
 <li>
-<p><strong>Tool-generated code is not a substitute for understanding the underlying registers.</strong> MCC Melody produces a working <code>DMA1_Initialize()</code> function, but reading that function and confirming the <code>DMAnDSA</code>, <code>DMAnSIRQ</code>, and <code>DMAnCON0</code> values match expectation was the only way to catch the destination-register bug. Generated code accelerates the boring parts but cannot diagnose itself.</p>
+<p><strong>Generated code is not a replacement for understanding the registers underneath.</strong> MCC Melody produces a working <code>DMA1_Initialize()</code> function, but reading that function and checking that the values for <code>DMAnDSA</code>, <code>DMAnSIRQ</code>, and <code>DMAnCON0</code> looked right was the only way to catch the destination register bug. Generated code speeds up the boring parts but cannot debug itself.</p>
 </li>
 <li>
-<p><strong>Hardware setup mistakes are easier to catch with an oscilloscope than with a debugger.</strong> Wasting an hour stepping through firmware to figure out why DMA never fired could have been replaced with five minutes of probing SCK and WS to confirm they were physically present and at the correct frequencies. Visualizing the signals on the wire short-circuits a huge class of bugs.</p>
+<p><strong>Hardware mistakes are easier to catch with a scope than with a debugger.</strong> Spending an hour stepping through firmware to figure out why DMA never fired could have been replaced with five minutes of probing SCK and WS to check that the clocks were even there. Looking at the actual signals on the wire takes care of a whole class of bugs at once.</p>
 </li>
 <li>
-<p><strong>Power budgets should be drawn up before the schematic, not after.</strong> The audio subsystem only ended up needing one rail (+3.3V) with a comfortable margin, but other students on the team discovered partway through that their rails were under-provisioned. A clear budget at the requirements stage prevents redesign during integration.</p>
+<p><strong>Power budgets should be done before the schematic, not after.</strong> The audio subsystem only ended up needing one rail (3.3V) with plenty of margin, but other team members found partway through the project that their rails were too small. A clear power budget at the requirements stage prevents redesigns later during integration.</p>
 </li>
 <li>
-<p><strong>Documentation written during the project is dramatically better than documentation written after.</strong> Markdown files for component selection, requirements, and the power budget were easier to write while the decisions were fresh. Reconstructing the rationale for choices made weeks earlier — like why the 12V external supply was chosen — is much harder than simply writing it down at the time of decision.</p>
+<p><strong>Documentation written during the project is much better than documentation written at the end.</strong> Markdown pages for component selection, requirements, and the power budget were easier to write while the decisions were fresh. Trying to remember weeks later why the 12V supply was chosen, for example, is much harder than just writing it down at the time.</p>
 </li>
 <li>
-<p><strong>Subsystem teams need to agree on physical interfaces early.</strong> UART pinouts, voltage levels, connector orientation, and ground references between the audio module and the rest of the robot caused integration friction. A signed-off interface document at the start would have prevented several rework cycles late in the project.</p>
+<p><strong>Teams need to agree on physical interfaces early.</strong> UART pinouts, voltage levels, connector orientation, and ground references between the audio module and the rest of the robot caused friction during integration. A short signed off interface document at the start would have prevented several late rework cycles.</p>
 </li>
 <li>
-<p><strong>Vague requirements lead to vague evaluation.</strong> The original microphone requirement said it should "transmit captured audio" without specifying what format, sample rate, or quality. Tightening that language to include I²S protocol, sample rate, and a measurable speech-capture target made it possible to evaluate whether the subsystem actually met the requirement at the end.</p>
+<p><strong>Vague requirements lead to vague results.</strong> The original microphone requirement said it should "transmit captured audio" with no mention of format, sample rate, or quality. Tightening that wording to include the I2S protocol, the sample rate, and a measurable speech capture target made it possible at the end to actually check whether the subsystem met the requirement.</p>
 </li>
 <li>
-<p><strong>Asking for help earlier is faster than struggling alone longer.</strong> The DMA destination-region bug, the I²S vs. I²C confusion, and the MPLAB Snap power issue were all things that would have been resolved in minutes by asking a teammate, professor, or AI tool, but instead consumed hours of self-directed debugging. Recognizing the boundary between productive struggle and stuck struggle is a skill worth building intentionally.</p>
+<p><strong>Asking for help earlier is faster than struggling alone longer.</strong> The DMA destination region bug, the confusion between I2S and I2C, and the MPLAB Snap power issue were all problems that could have been solved in minutes by asking a teammate, the professor, or an AI tool. Instead they ate up hours of solo debugging. Knowing when to keep pushing and when to ask for help is a real skill worth building on purpose.</p>
 </li>
 </ol>
 <h3 id="recommendations-for-future-students">Recommendations for Future Students</h3>
 <ol>
 <li>
-<p><strong>Get comfortable with reading datasheets before the class begins, particularly the section on peripheral block diagrams and timing diagrams.</strong> Most of the early debugging effort comes from misunderstanding what a peripheral can and cannot do, and the datasheet always has the answer well before any forum post does.</p>
+<p><strong>Get comfortable reading datasheets before the class starts, especially the peripheral block diagrams and timing diagrams.</strong> Most of the early debugging time comes from not understanding what a peripheral can and cannot do, and the answer is almost always sitting in the datasheet long before it shows up on a forum post.</p>
 </li>
 <li>
-<p><strong>Pick your microcontroller to match the protocols your peripherals actually require, not the chip your team is most familiar with.</strong> A small amount of research at the component-selection stage saves enormous amounts of firmware effort later, especially for protocols like I²S, USB, or CAN that benefit hugely from native hardware support.</p>
+<p><strong>Pick a microcontroller that already supports the protocols your peripherals need, not just the chip your team has used before.</strong> A little research during component selection saves a lot of firmware effort later, especially for protocols like I2S, USB, or CAN that work much better on chips with real hardware support.</p>
 </li>
 <li>
-<p><strong>Buy or borrow an inexpensive logic analyzer or oscilloscope before the project starts and learn how to use it on simple signals first.</strong> Almost every embedded bug becomes obvious the moment the signals are visible, and learning to read a scope under deadline pressure is a poor time to start.</p>
+<p><strong>Get hold of a cheap logic analyzer or oscilloscope before the project starts and practice using it on easy signals first.</strong> Almost every embedded bug becomes obvious the moment the signals are visible, and learning to read a scope under deadline pressure is the worst time to start.</p>
 </li>
 <li>
-<p><strong>Write your documentation as you go, not at the end of the project.</strong> Every design choice, component selection, and debugging insight should be recorded in markdown immediately, with the rationale included. End-of-semester documentation crunches produce worse documents and lose information that was clear at the time of the decision.</p>
+<p><strong>Write your documentation as you go, not at the end of the project.</strong> Every design choice, component selection, and debugging note should be written in markdown right away, with the reason included. Trying to write all the documentation at the end of the semester produces weaker documents and loses information that was clear at the time.</p>
 </li>
 <li>
-<p><strong>Treat your team's interfaces — power rails, UART pinouts, ground references, connector orientations — as contracts that need to be signed off before any subsystem starts building.</strong> Nearly every integration-day surprise comes from a small assumption that one subsystem made about another, and a one-page interface specification prevents almost all of them.</p>
+<p><strong>Treat your team interfaces (power rails, UART pinouts, ground references, connector orientation) as agreements that need to be signed off before any subsystem starts building.</strong> Almost every surprise on integration day comes from one small assumption that one subsystem made about another, and a single page interface document prevents almost all of them.</p>
 </li>
 </ol>
 
