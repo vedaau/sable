@@ -10,7 +10,7 @@ This page shows the final schematic for the Sable Audio Subsystem, drawn in KiCa
 
 ### Schematic Diagram
 
-![Sable Audio Subsystem Schematic](schematicaudio.png)
+![Sable Audio Subsystem Schematic](schematicaudio.PNG)
 
 ---
 
