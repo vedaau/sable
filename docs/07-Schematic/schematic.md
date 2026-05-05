@@ -1,19 +1,17 @@
 ---
-title: Module Schematic
+title: Schematic
 ---
 
-## Overview
+## Schematic
 
-This schematic is designed to support the audio subsystem by providing stable power regulation, microphone signal conditioning through the op-amp circuit, and control and processing using the PIC microcontroller to capture and communicate audio data with the rest of the system.
+### Overview
 
-The schematic is divided into several main sections. The power supply converts incoming power into a stable voltage used by the electronics. The microphone and op-amp circuit amplify and condition the analog audio signal so it can be read by the microcontroller. The PIC microcontroller acts as the main controller, processing the audio signal and sending data to other subsystems through communication connections. A debug LED and test points are included to help with testing and troubleshooting during development. Together, these sections allow the subsystem to reliably capture sound, process it, and share useful information with the overall system.
+This page shows the final schematic for the Sable Audio Subsystem, drawn in KiCad 9.0. The schematic is split into six labeled sections to make it easier to follow. The Power Supply section takes a 12V input from a barrel jack and uses an LM2575 switching regulator to produce the 3.3V rail that powers the rest of the board, with a 2A fuse and a Schottky diode for protection. The Micro Controller section shows the PIC18F27Q43 with its decoupling capacitors, reset pull up resistor, and the extra pin header used during bring up. The Microphone and Op Amp section shows the ICS-43434 digital MEMS microphone connected to the SCK, WS, and SD pins of the PIC, with its select pin tied to ground so it speaks on the left channel of the I2S frame. The Subsystem Connections section shows the two 2x4 IDC connectors used to daisy chain UART communication to the rest of the robot. The Debug LED section is a simple status LED with a current limiting resistor that the firmware uses to show when the microphone is picking up sound. The ICSP Header section provides a clean programming and debug interface for the MPLAB Snap so the chip can be flashed and inspected without disturbing the rest of the board.
 
+### Schematic Diagram
 
+![Sable Audio Subsystem Schematic](schematicaudio.png)
 
-![schematic](audiosubsystem.png){style width:"350" height:"300;"}
-**Figure #1:** Audio Subsystem Schematic
+---
 
-
-## Resouces
-
-The schematic as a PDF download is available [*here*](audiosubsystem.pdf), and the Zip folder of the project [*here*](audiosubsystem.zip).
+**Downloads:** [KiCad project (.zip)](audiosubsystem.zip) | [PDF](audiosubsystem.pdf)
