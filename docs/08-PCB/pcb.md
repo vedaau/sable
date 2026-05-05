@@ -12,11 +12,11 @@ This page documents the final printed circuit board for the Sable Audio Subsyste
 
 **Front view (ECAD render)**
 
-![PCB front view from KiCad](pcb_front_render.png)
+![PCB front view from KiCad](pcb_front_render.PNG)
 
 **Back view (ECAD render)**
 
-![PCB back view from KiCad](pcb_back_render.png)
+![PCB back view from KiCad](pcb_back_render.PNG)
 
 ### Raw PCB (Before Population)
 
