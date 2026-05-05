@@ -22,18 +22,18 @@ This page documents the final printed circuit board for the Sable Audio Subsyste
 
 This is the bare board as it arrived from the fabricator, before any components were soldered down.
 
-![Raw PCB front, before population](pcb_raw_front.jpg)
+![Raw PCB front, before population](nfimage.jpg)
 
-![Raw PCB back, before population](pcb_raw_back.jpg)
+![Raw PCB back, before population](nbimage.jpg)
 
 ### Finalized PCB (After Soldering and Testing)
 
 This is the populated and tested board after every component was placed, soldered, and verified.
 
-![Finalized PCB front, after soldering](pcb_final_front.jpg)
+![Finalized PCB front, after soldering](pfimage.jpg)
 
-![Finalized PCB back, after soldering](pcb_final_back.jpg)
+![Finalized PCB back, after soldering](pbimage.jpg)
 
 ---
 
-**Downloads:** [KiCad ECAD project (.zip)](audiosubsystem_kicad.zip) | [Gerber files (.zip)](audiosubsystem_gerbers.zip)
+**Downloads:** [KiCad ECAD project (.zip)](audiosubsystem.zip) | [Gerber files (.zip)](VedaaGerberfiles.zip)
