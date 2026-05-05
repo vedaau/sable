@@ -26,7 +26,7 @@
 
     
       
-        <title>Module's PCB - EGR 314 Vedaa Ubale Data Sheet</title>
+        <title>PCB - EGR 314 Vedaa Ubale Data Sheet</title>
       
     
     
@@ -125,7 +125,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Module's PCB
+              PCB
             
           </span>
         </div>
@@ -683,6 +683,48 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="PCB">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ecad-render-front-and-back" class="md-nav__link">
+    <span class="md-ellipsis">
+      ECAD Render (Front and Back)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#raw-pcb-before-population" class="md-nav__link">
+    <span class="md-ellipsis">
+      Raw PCB (Before Population)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finalized-pcb-after-soldering-and-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Finalized PCB (After Soldering and Testing)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -804,6 +846,48 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="PCB">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ecad-render-front-and-back" class="md-nav__link">
+    <span class="md-ellipsis">
+      ECAD Render (Front and Back)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#raw-pcb-before-population" class="md-nav__link">
+    <span class="md-ellipsis">
+      Raw PCB (Before Population)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finalized-pcb-after-soldering-and-testing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Finalized PCB (After Soldering and Testing)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -832,6 +916,23 @@
   <h1>PCB</h1>
 
 <h2 id="pcb">PCB</h2>
+<h3 id="overview">Overview</h3>
+<p>This page documents the final printed circuit board for the Sable Audio Subsystem. The board was designed in KiCad 9.0 from the schematic shown on the Schematic page, then exported as Gerber files and sent out for fabrication. The layout places the noisy switching regulator components on one side of the board and keeps the microphone and microcontroller on the quieter side, with a single point ground tie under the microcontroller to reduce supply ripple at the audio inputs. Two 2x4 IDC connectors on the edge of the board carry power and the daisy chained UART signals to the neighboring subsystems on the robot. After fabrication the board was hand soldered, tested for shorts on the 3.3V rail, programmed through the ICSP header, and verified to capture audio from the microphone and forward UART traffic correctly. The downloads at the bottom of the page include the full KiCad project, the Gerber files used for fabrication, and front and back images of the board.</p>
+<h3 id="ecad-render-front-and-back">ECAD Render (Front and Back)</h3>
+<p><strong>Front view (ECAD render)</strong></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="pcb_front_render.png" data-desc-position="bottom"><img alt="PCB front view from KiCad" src="pcb_front_render.png"></a></p>
+<p><strong>Back view (ECAD render)</strong></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="pcb_back_render.png" data-desc-position="bottom"><img alt="PCB back view from KiCad" src="pcb_back_render.png"></a></p>
+<h3 id="raw-pcb-before-population">Raw PCB (Before Population)</h3>
+<p>This is the bare board as it arrived from the fabricator, before any components were soldered down.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="pcb_raw_front.jpg" data-desc-position="bottom"><img alt="Raw PCB front, before population" src="pcb_raw_front.jpg"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="pcb_raw_back.jpg" data-desc-position="bottom"><img alt="Raw PCB back, before population" src="pcb_raw_back.jpg"></a></p>
+<h3 id="finalized-pcb-after-soldering-and-testing">Finalized PCB (After Soldering and Testing)</h3>
+<p>This is the populated and tested board after every component was placed, soldered, and verified.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="pcb_final_front.jpg" data-desc-position="bottom"><img alt="Finalized PCB front, after soldering" src="pcb_final_front.jpg"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="pcb_final_back.jpg" data-desc-position="bottom"><img alt="Finalized PCB back, after soldering" src="pcb_final_back.jpg"></a></p>
+<hr>
+<p><strong>Downloads:</strong> <a href="audiosubsystem_kicad.zip">KiCad ECAD project (.zip)</a> | <a href="audiosubsystem_gerbers.zip">Gerber files (.zip)</a></p>
 
 
 
