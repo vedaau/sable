@@ -10,4 +10,4 @@ This block diagram shows the main parts of the Microphone Subsystem and how they
 
 ## Audio Subsystem Block Diagram 
 
-![Audio Subsystem Block Diagram](audiosub.drawio.png)
+![Audio Subsystem Block Diagram](audiosubs.drawio.png)
